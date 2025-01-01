@@ -33,12 +33,16 @@
             text-decoration: underline;
         }
         section {
+            display: none;
             padding: 2rem;
             background: #ffffff;
             margin: 1rem auto;
             max-width: 800px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        section.active {
+            display: block;
         }
         footer {
             text-align: center;
@@ -54,9 +58,9 @@
         <h1>hv31 sound design</h1>
     </header>
     <nav>
-        <a href="#">1</a>
-        <a href="#o-mnie">2</a>
-        <a href="#kontakt">3</a>
+        <a href="#" data-target="none">1</a>
+        <a href="#" data-target="o-mnie">2</a>
+        <a href="#" data-target="kontakt">3</a>
     </nav>
     <section id="o-mnie">
         <h2>2</h2>
@@ -69,5 +73,26 @@
     <footer>
         <p>&copy; 2025 hv31 gallery</p>
     </footer>
+    <script>
+        const navLinks = document.querySelectorAll('nav a');
+        const sections = document.querySelectorAll('section');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault(); // Zatrzymuje domyślne przejście do kotwicy
+                const targetId = link.getAttribute('data-target');
+
+                // Ukrywa wszystkie sekcje
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                // Pokazuje sekcję powiązaną z klikniętym linkiem
+                if (targetId !== 'none') {
+                    document.getElementById(targetId).classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
